@@ -1,0 +1,73 @@
+@keyframes roll-dice {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(10%) rotate(3deg);
+  }
+
+  75% {
+    transform: translateY(-10%) rotate(-3deg);
+  }
+}
+
+.roll {
+  margin-bottom: 1em;
+}
+
+.roll > * { margin: 0 0 8px }
+
+.roll dl {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0.5em;
+  font-weight: medium;
+}
+
+.die {
+  border: 2px solid gainsboro;
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+  text-align: center;
+  min-width: 2em;
+  margin-right: 0.5em;
+
+  transform-origin: center center;
+  animation: roll-dice 250ms;
+  animation-iteration-count: 3;
+}
+.die:nth-child(5n+1) {
+  animation-delay: 50ms;
+}
+.die:nth-child(5n+2) {
+  animation-delay: 100ms;
+}
+.die:nth-child(5n+3) {
+  animation-delay: 150ms;
+}
+.die:nth-child(5n+4) {
+  animation-delay: 200ms;
+}
+.crit {
+  border-color: indigo;
+}
+.fail {
+  border-color: firebrick;
+}
+.static {
+  animation: none;
+}
+.die dd {
+  margin: 0;
+}
+.die dt {
+  font-size: 0.8em;
+  opacity: 0.5;
+  margin-left: 2px;
+}
+
+.total {
+  font-size: 1.4em;
+  font-weight: 500;
+}
