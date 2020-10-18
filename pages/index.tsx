@@ -1,65 +1,80 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { memo, ReactChild, useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import { initialState, reducer, RollProps } from '../src/reducer';
+import { stringifyRoll, sum } from '../src/roll';
+import styles from '../styles/roll.module.css';
 
-export default function Home() {
+const STORAGE_KEY = 'dice-city-state';
+
+export default function Roll() {
+  const [state, dispatch] = useReducer(reducer, initialState, () => {
+    // initialize from local storage
+    try {
+      const data = localStorage?.getItem(STORAGE_KEY);
+      return new Map(data && JSON.parse(data)) as typeof initialState;
+    } catch {
+      return initialState;
+    }
+  });
+
+  useEffect(() => {
+    // save locally when updated
+    localStorage?.setItem(STORAGE_KEY, JSON.stringify(Array.from(state)));
+  }, [state]);
+
+  const [roll, setRoll] = useState('');
+  const handleSubmit = useCallback(() => {
+    dispatch({ type: 'parse', roll });
+    setRoll('');
+  }, [roll]);
+  const handleRollAll = useCallback(() => dispatch({ type: 'roll-all' }), []);
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+    <div>
+      <header className={styles.header}>
+        <p>
+          <input type="text" placeholder="2d6+5" value={roll} onChange={(e) => setRoll(e.currentTarget.value)} />
+          <button onClick={handleSubmit}>Add</button>
+          <br />
+          <small>Use "XdY" format to describe rolls.</small>
         </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+        <button onClick={handleRollAll}>Roll all</button>
+      </header>
+      <ul>
+        {Array.from(state.values()).map((h) => (
+          <SingleRoll key={h.id} {...h} dispatch={dispatch} />
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
+
+const SingleRoll = memo<RollProps>(({ id, roll, dice, name, dispatch }) => {
+  const els = dice.map(([val, sides], i) => {
+    const classes = [styles.die, val === sides && styles.crit, val === 1 && styles.fail, sides === 1 && styles.static]
+      .filter(Boolean)
+      .join(' ');
+    return (
+      <div className={classes} key={[val, sides, i].join(' ')}>
+        <dd>{val}</dd>
+        {sides > 1 && <dt>d{sides}</dt>}
+      </div>
+    );
+  });
+  return (
+    <li className={styles.roll}>
+      <input
+        type="text"
+        defaultValue={name}
+        placeholder="Name this roll"
+        onBlur={(e) => dispatch({ type: 'name', id, name: e.currentTarget.value })}
+      />
+      <br />
+      <h4>{stringifyRoll(roll)}</h4>
+      <dl>
+        {els}
+        <span className={styles.total}>= {sum(dice)}</span>
+      </dl>
+      <button onClick={() => dispatch({ id, type: 'roll' })}>Roll</button>&nbsp;
+      <button onClick={() => window.confirm('Are you sure?') && dispatch({ id, type: 'delete' })}>Delete</button>
+    </li>
+  );
+});
