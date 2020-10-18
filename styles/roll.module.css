@@ -12,6 +12,10 @@
   }
 }
 
+.header {
+  margin: 1em;
+}
+
 .roll {
   margin-bottom: 1em;
 }
