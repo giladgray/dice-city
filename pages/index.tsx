@@ -34,7 +34,7 @@ export default function Roll() {
           <input type="text" placeholder="2d6+5" value={roll} onChange={(e) => setRoll(e.currentTarget.value)} />
           <button onClick={handleSubmit}>Add</button>
           <br />
-          <small>Use "XdY" format to describe rolls.</small>
+          <small>Describe rolls in <code>XdY</code> format: <code>3d6</code>, <code>1d12+5</code>, <code>2d4+2d8</code></small>
         </p>
         <button onClick={handleRollAll}>Roll all</button>
       </header>
@@ -73,8 +73,8 @@ const SingleRoll = memo<RollProps>(({ id, roll, dice, name, dispatch }) => {
         {els}
         <span className={styles.total}>= {sum(dice)}</span>
       </dl>
-      <button onClick={() => dispatch({ id, type: 'roll' })}>Roll</button>&nbsp;
-      <button onClick={() => window.confirm('Are you sure?') && dispatch({ id, type: 'delete' })}>Delete</button>
+      <button onClick={() => dispatch({ id, type: 'roll' })}>Roll</button>&nbsp;&nbsp;
+      <button onClick={() => window.confirm('Are you sure?') && dispatch({ id, type: 'delete' })}>&times;</button>
     </li>
   );
 });
