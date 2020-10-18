@@ -16,7 +16,7 @@ export interface RollProps extends RollState {
 export type State = Map<string, RollState>;
 
 export type Action =
-  | { type: 'roll-all'}
+  | { type: 'roll-all' }
   | {
       type: 'roll';
       id: string;
@@ -24,13 +24,21 @@ export type Action =
   | {
       type: 'parse';
       roll: string;
-    } | { type: 'name', id: string, name: string };
+    }
+  | { type: 'name'; id: string; name: string }
+  | { type: 'delete'; id: string };
 
+export const initialState: State = new Map();
 export function reducer(state: State, action: Action): State {
   switch (action.type) {
+    case 'delete': {
+      const next = new Map(state);
+      next.delete(action.id);
+      return next;
+    }
     case 'roll-all': {
       const next = new Map(state);
-      next.forEach(r => next.set(r.id, { ...r, dice: performRoll(r.roll) }))
+      next.forEach((r) => next.set(r.id, { ...r, dice: performRoll(r.roll) }));
       return next;
     }
     case 'roll': {
@@ -45,7 +53,7 @@ export function reducer(state: State, action: Action): State {
       const parsed = parseRoll(action.roll);
       if (parsed) {
         const id = stringifyRoll(parsed);
-        return new Map(state).set(id, { id, roll: parsed, dice: performRoll(parsed), name: '' })
+        return new Map(state).set(id, { id, roll: parsed, dice: performRoll(parsed), name: '' });
       }
       return state;
     }
