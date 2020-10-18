@@ -12,8 +12,15 @@
   }
 }
 
+.title {
+  display: flex;
+  align-items: baseline;
+}
+.title h5,
+.title h1 { margin-bottom: 0; }
+
 .header {
-  margin: 1em;
+  margin: 0 1em;
 }
 
 .roll {

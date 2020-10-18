@@ -30,6 +30,10 @@ export default function Roll() {
   return (
     <div>
       <header className={styles.header}>
+        <div className={styles.title}>
+          <h1>Dice City&nbsp;</h1>
+          <h5>where the dice are dicey and the rolls are spicy</h5>
+        </div>
         <p>
           <input type="text" placeholder="2d6+5" value={roll} onChange={(e) => setRoll(e.currentTarget.value)} />
           <button onClick={handleSubmit}>Add</button>
@@ -69,7 +73,7 @@ const SingleRoll = memo<RollProps>(({ id, roll, dice, name, dispatch }) => {
       />
       <br />
       <h4>{stringifyRoll(roll)}</h4>
-      <dl>
+      <dl className={styles.flexRow}>
         {els}
         <span className={styles.total}>= {sum(dice)}</span>
       </dl>
