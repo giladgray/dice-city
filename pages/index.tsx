@@ -2,6 +2,7 @@ import { memo, ReactChild, useCallback, useEffect, useMemo, useReducer, useState
 import { initialState, reducer, RollProps } from '../src/reducer';
 import { stringifyRoll, sum } from '../src/roll';
 import styles from '../styles/roll.module.css';
+import Head from 'next/head';
 
 const STORAGE_KEY = 'dice-city-state';
 
@@ -29,6 +30,9 @@ export default function Roll() {
   const handleRollAll = useCallback(() => dispatch({ type: 'roll-all' }), []);
   return (
     <div>
+      <Head>
+        <title>Dice City</title>
+      </Head>
       <header className={styles.header}>
         <div className={styles.title}>
           <h1>Dice City&nbsp;</h1>
