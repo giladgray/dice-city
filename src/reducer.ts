@@ -1,11 +1,11 @@
 import { Dispatch } from "react";
-import { ParsedRoll, parseRoll, performRoll, stringifyRoll } from "./roll";
+import { ParsedRoll, parseRoll, performRoll, RolledDice, stringifyRoll } from "./roll";
 
 interface RollState {
   id: string;
   name: string;
   roll: ParsedRoll;
-  dice: [number, number][];
+  dice: RolledDice;
 }
 
 export interface RollProps extends RollState {

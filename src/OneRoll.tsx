@@ -15,7 +15,7 @@ export const OneRoll = memo<Props>(({ roll, onDelete, onRename }) => {
   const [dice, setDice] = useState<RolledDice>([]);
   const rolldice = useCallback(() => (parsed ? setDice(performRoll(parsed)) : undefined), [parsed, setDice]);
   useEffect(rolldice, []);
-  const els = dice.map(([value, sides], i) => <Die key={[value, sides, i].join(" ")} sides={sides} value={value} />);
+  const els = dice.map((d, i) => <Die key={[d.value, d.sides, i].join(" ")} {...d} />);
   return (
     <div className={styles.roll}>
       {onRename && (
@@ -46,7 +46,6 @@ const Die: React.FC<{ sides: number; value: number }> = ({ sides, value }) => {
     value === sides && sides > 1 && styles.crit,
     value === 1 && sides > 1 && styles.fail,
     sides === 1 && styles.static,
-    sides > 100 && styles.wide,
   ]
     .filter(Boolean)
     .join(" ");
