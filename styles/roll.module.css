@@ -1,3 +1,4 @@
+
 @keyframes roll-dice {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
@@ -23,31 +24,28 @@
   margin: 0 1em;
 }
 
-.roll {
-  margin-bottom: 1em;
-}
-
-.roll > * { margin: 0 0 8px }
+.roll > * { margin: 0 0 0.7em }
 
 .roll dl {
+  --die-size: 40px;
   display: flex;
-  align-items: center;
-  margin: 0 0 0.5em;
+  align-items: flex-end;
   font-weight: 600;
+}
+.roll button:not(:last-child),
+.roll .die:not(:last-child) {
+  margin-right: 0.5em;
 }
 
 .die {
-  border: 2px solid gainsboro;
-  padding: 0.25em 0.5em;
-  border-radius: 4px;
   text-align: center;
   min-width: 2em;
-  margin-right: 0.5em;
 
   transform-origin: center center;
   animation: roll-dice 250ms;
   animation-iteration-count: 3;
 }
+/* stagger animations */
 .die:nth-child(5n+1) {
   animation-delay: 50ms;
 }
@@ -60,25 +58,86 @@
 .die:nth-child(5n+4) {
   animation-delay: 200ms;
 }
-.crit {
-  border-color: indigo;
-}
-.fail {
-  border-color: firebrick;
-}
 .static {
   animation: none;
 }
-.die dd {
-  margin: 0;
-}
+
+/* "d6" label */
 .die dt {
-  font-size: 0.8em;
+  margin-bottom: 2px;
+  font-size: 0.7em;
   opacity: 0.5;
-  margin-left: 2px;
   font-weight: initial;
+}
+
+/* die roll itself */
+.die dd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--die-size);
+  min-height: var(--die-size);
+  margin: 0;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  font-size: 1.3em;
+  padding: 0 0.2em;
+}
+.static dd {
+  border-color: lightsteelblue;
+  background: rgba(176,196,222,0.1);
+}
+.crit dd {
+  border-color: goldenrod;
+  background: rgba(218, 165, 32, 0.1);
+}
+.fail dd {
+  border-color: firebrick;
+  background: rgba(178,34,34,0.1);
 }
 
 .total {
   font-size: 1.4em;
+  line-height: var(--die-size);
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 1em 0;
+}
+
+.top p {
+  margin: 0;
+  margin-right: 2em;
+  border-radius: .5em;
+  border: 1px solid slategrey;
+  padding: 1em;
+}
+.top dl {
+  justify-content: center;
+}
+.top .roll {
+  margin-right: 1em;
+}
+
+.topDice {
+  display: grid;
+  grid-auto-columns: repeat(auto-fill, 60px);
+  grid-gap: 2em;
+}
+
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.canvas .roll {
+  margin: 1em;
+  border: 1px solid cornflowerblue;
+  border-radius: 0.5em;
+  padding: 0.5em;
 }
