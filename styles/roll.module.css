@@ -1,6 +1,6 @@
-
 @keyframes roll-dice {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
 
@@ -18,13 +18,17 @@
   align-items: baseline;
 }
 .title h5,
-.title h1 { margin-bottom: 0; }
+.title h1 {
+  margin-bottom: 0;
+}
 
 .header {
   margin: 0 1em;
 }
 
-.roll > * { margin: 0 0 0.7em }
+.roll > * {
+  margin: 0 0 0.7em;
+}
 
 .roll dl {
   --die-size: 40px;
@@ -46,16 +50,16 @@
   animation-iteration-count: 3;
 }
 /* stagger animations */
-.die:nth-child(5n+1) {
+.die:nth-child(5n + 1) {
   animation-delay: 50ms;
 }
-.die:nth-child(5n+2) {
+.die:nth-child(5n + 2) {
   animation-delay: 100ms;
 }
-.die:nth-child(5n+3) {
+.die:nth-child(5n + 3) {
   animation-delay: 150ms;
 }
-.die:nth-child(5n+4) {
+.die:nth-child(5n + 4) {
   animation-delay: 200ms;
 }
 .static {
@@ -85,7 +89,7 @@
 }
 .static dd {
   border-color: lightsteelblue;
-  background: rgba(176,196,222,0.1);
+  background: rgba(176, 196, 222, 0.1);
 }
 .crit dd {
   border-color: goldenrod;
@@ -93,7 +97,7 @@
 }
 .fail dd {
   border-color: firebrick;
-  background: rgba(178,34,34,0.1);
+  background: rgba(178, 34, 34, 0.1);
 }
 
 .total {
@@ -111,7 +115,7 @@
 .top p {
   margin: 0;
   margin-right: 2em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   border: 1px solid slategrey;
   padding: 1em;
 }

@@ -27,5 +27,6 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "react/no-render-return-value": "off",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
 };

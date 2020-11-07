@@ -15,7 +15,7 @@ export function parseRoll(roll: string): ParsedRoll | null {
 }
 
 export function stringifyRoll(roll: ParsedRoll) {
-  return roll.map((r) => (r.sides === 1 ? r.count : `${r.count}d${r.sides}`)).join(' + ');
+  return roll.map((r) => (r.sides === 1 ? r.count : `${r.count}d${r.sides}`)).join(" + ");
 }
 
 export function rollDie(die: ParsedRoll[0]): RolledDice {
