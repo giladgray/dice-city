@@ -25,10 +25,11 @@
 .title {
   display: flex;
   align-items: baseline;
+  margin-top: 1.5em
 }
 .title h5,
 .title h1 {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .header {
@@ -39,6 +40,7 @@
   --die-size: 40px;
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
   font-weight: 600;
 }
 .roll button:not(:last-child),
@@ -126,6 +128,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  flex-wrap: wrap;
   margin-bottom: 1em;
 }
 .top h4 {
@@ -160,4 +163,11 @@
 
 .canvas .roll:last-child {
   border-color: gainsboro;
+}
+
+/* responsive styles for mobile */
+@media (max-width: 600px) {
+  .title {
+    flex-direction: column;
+  }
 }
