@@ -3,6 +3,8 @@ import { initialState, reducer } from "../src/reducer";
 import { OneRoll } from "../src/OneRoll";
 import styles from "../styles/roll.module.css";
 import Head from "next/head";
+import { NewRoll } from "../src/NewRoll";
+import { FastDice } from "../src/FastDice";
 
 const DELETE_MSG = "Are you sure you want to delete this roll?";
 const STORAGE_KEY = "dice-city-state";
@@ -54,6 +56,7 @@ export default function Roll(): JSX.Element {
             onRename={(name) => dispatch({ type: "name", id: r, name })}
           />
         ))}
+        <NewRoll onCreate={(roll, name) => dispatch({ type: "parse", roll, name })} />
       </ul>
     </div>
   );
