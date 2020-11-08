@@ -10,7 +10,7 @@ import { useLocalStorage } from "../src/useLocalStorage";
 const DELETE_MSG = "Are you sure you want to delete this roll?";
 const STORAGE_KEY = "dice-city-state-2";
 
-export default function Roll(): JSX.Element {
+export default function Index(): JSX.Element {
   const [savedState, persistState] = useLocalStorage<[string, RollState][]>(STORAGE_KEY, []);
   const [state, dispatch] = useReducer(reducer, initialState, () => new Map(savedState));
 
@@ -25,6 +25,7 @@ export default function Roll(): JSX.Element {
         <link rel="manifest" href="/site.webmanifest" />
         <title>Dice City</title>
       </Head>
+
       <header className={styles.header}>
         <div className={styles.title}>
           <h1>Dice City&nbsp;</h1>
@@ -32,6 +33,7 @@ export default function Roll(): JSX.Element {
         </div>
         <FastDice />
       </header>
+
       <ul className={styles.canvas}>
         {Array.from(state.values()).map(({ id, name, roll }) => (
           <OneRoll
@@ -44,8 +46,21 @@ export default function Roll(): JSX.Element {
         ))}
         <NewRoll onCreate={(roll, name) => dispatch({ type: "add", roll, name })} />
       </ul>
+
+      <address className={styles.attrib}>
+        Made with &lt;/&gt; by{" "}
+        <a href="https://twitter.com/giladgray" target="_blank" rel="noopener noreferrer">
+          @giladgray
+        </a>
+        {" – "}
+        <a href="https://github.com/giladgray/dice-city" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        {" – "}
+        <a href="https://www.flaticon.com/free-icon/dice_459493" target="_blank" rel="noopener noreferrer">
+          Favicon source
+        </a>
+      </address>
     </div>
   );
 }
-
-// Icons made by <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
