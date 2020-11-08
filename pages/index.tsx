@@ -43,19 +43,7 @@ export default function Roll(): JSX.Element {
           <h1>Dice City&nbsp;</h1>
           <h5>where the dice are dicey and the rolls are spicy</h5>
         </div>
-        <div className={styles.top}>
-          <p>
-            <input type="text" placeholder="2d6+5" value={value} onChange={(e) => setValue(e.currentTarget.value)} />{" "}
-            <button onClick={handleSubmit}>Add</button>
-            <br />
-            <small>
-              Describe rolls in <code>XdY</code> format: <code>3d6</code>, <code>1d12+5</code>, <code>2d4+2d8</code>
-            </small>
-          </p>
-          {BASIC_ROLLS.map((r) => (
-            <OneRoll key={r} roll={r} />
-          ))}
-        </div>
+        <FastDice />
       </header>
       <ul className={styles.canvas}>
         {rolls.map((r, i) => (
