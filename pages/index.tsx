@@ -30,6 +30,13 @@ export default function Index(): JSX.Element {
         <div className={styles.title}>
           <h1>Dice City&nbsp;</h1>
           <h5>where the dice are dicey and the rolls are spicy</h5>
+          <address className={styles.attrib}>
+            Made with {"</>"} by {link("https://twitter.com/giladgray", "@giladgray")}
+            {" – "}
+            {link("https://github.com/giladgray/dice-city", "GitHub")}
+            {" – "}
+            {link("https://www.flaticon.com/free-icon/dice_459493", "Favicon source")}
+          </address>
         </div>
         <FastDice />
       </header>
@@ -46,21 +53,14 @@ export default function Index(): JSX.Element {
         ))}
         <NewRoll onCreate={(roll, name) => dispatch({ type: "add", roll, name })} />
       </ul>
-
-      <address className={styles.attrib}>
-        Made with &lt;/&gt; by{" "}
-        <a href="https://twitter.com/giladgray" target="_blank" rel="noopener noreferrer">
-          @giladgray
-        </a>
-        {" – "}
-        <a href="https://github.com/giladgray/dice-city" target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-        {" – "}
-        <a href="https://www.flaticon.com/free-icon/dice_459493" target="_blank" rel="noopener noreferrer">
-          Favicon source
-        </a>
-      </address>
     </div>
+  );
+}
+
+function link(href: string, text: string) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {text}
+    </a>
   );
 }
