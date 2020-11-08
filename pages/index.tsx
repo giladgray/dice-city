@@ -8,7 +8,7 @@ import { FastDice } from "../src/FastDice";
 import { useLocalStorage } from "../src/useLocalStorage";
 
 const DELETE_MSG = "Are you sure you want to delete this roll?";
-const STORAGE_KEY = "dice-city-state";
+const STORAGE_KEY = "dice-city-state-2";
 
 export default function Roll(): JSX.Element {
   const [savedState, persistState] = useLocalStorage<[string, RollState][]>(STORAGE_KEY, []);
