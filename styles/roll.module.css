@@ -103,6 +103,11 @@
   border-radius: 50%;
 }
 
+.die input:invalid {
+  border-color: firebrick;
+  outline-color: firebrick;
+}
+
 .total {
   font-size: 1.4em;
   line-height: var(--die-size);
