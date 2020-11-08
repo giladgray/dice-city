@@ -4,13 +4,12 @@ import styles from "../styles/roll.module.css";
 
 interface Props {
   roll: string;
-
-  id?: string;
+  name?: string;
   onDelete?: () => void;
   onRename?: (name: string) => void;
 }
 
-export const OneRoll = memo<Props>(({ roll, onDelete, onRename }) => {
+export const OneRoll = memo<Props>(({ name, roll, onDelete, onRename }) => {
   const parsed = useMemo(() => parseRoll(roll), [roll]);
   const [dice, setDice] = useState<RolledDice>([]);
   const rolldice = useCallback(() => (parsed ? setDice(performRoll(parsed)) : undefined), [parsed, setDice]);
@@ -46,6 +45,7 @@ const Die: React.FC<{ sides: number; value: number }> = ({ sides, value }) => {
     value === sides && sides > 1 && styles.crit,
     value === 1 && sides > 1 && styles.fail,
     sides === 1 && styles.static,
+    sides === 2 && styles.coin,
   ]
     .filter(Boolean)
     .join(" ");

@@ -18,7 +18,7 @@ export type State = Map<string, RollState>;
 export type Action =
   | { type: "delete"; id: string }
   | { type: "name"; id: string; name: string }
-  | { type: "parse"; roll: string }
+  | { type: "parse"; roll: string; name?: string }
   | { type: "roll"; id: string }
   | { type: "roll-all" };
 
@@ -47,7 +47,7 @@ export function reducer(state: State, action: Action): State {
       const parsed = parseRoll(action.roll);
       if (parsed) {
         const id = stringifyRoll(parsed);
-        return new Map(state).set(id, { id, roll: parsed, dice: performRoll(parsed), name: "" });
+        return new Map(state).set(id, { id, roll: parsed, dice: performRoll(parsed), name: action.name ?? "" });
       }
       return state;
     }
