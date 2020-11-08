@@ -1,29 +1,20 @@
 import React, { useEffect, useReducer } from "react";
-import { initialState, reducer } from "../src/reducer";
+import { initialState, reducer, RollState } from "../src/reducer";
 import { OneRoll } from "../src/OneRoll";
 import styles from "../styles/roll.module.css";
 import Head from "next/head";
 import { NewRoll } from "../src/NewRoll";
 import { FastDice } from "../src/FastDice";
+import { useLocalStorage } from "../src/useLocalStorage";
 
 const DELETE_MSG = "Are you sure you want to delete this roll?";
 const STORAGE_KEY = "dice-city-state";
 
 export default function Roll(): JSX.Element {
-  const [state, dispatch] = useReducer(reducer, initialState, () => {
-    // initialize from local storage
-    try {
-      const data = localStorage?.getItem(STORAGE_KEY);
-      return new Map(data && JSON.parse(data)) as typeof initialState;
-    } catch {
-      return initialState;
-    }
-  });
+  const [savedState, persistState] = useLocalStorage<[string, RollState][]>(STORAGE_KEY, []);
+  const [state, dispatch] = useReducer(reducer, initialState, () => new Map(savedState));
 
-  useEffect(() => {
-    // save locally when updated
-    localStorage?.setItem(STORAGE_KEY, JSON.stringify(Array.from(state)));
-  }, [state]);
+  useEffect(() => persistState(Array.from(state)), [state]);
 
   return (
     <div>
@@ -38,16 +29,16 @@ export default function Roll(): JSX.Element {
         <FastDice />
       </header>
       <ul className={styles.canvas}>
-        {Array.from(state.values()).map(({ id, name }) => (
+        {Array.from(state.values()).map(({ id, name, roll }) => (
           <OneRoll
             key={id}
             name={name}
-            roll={id}
+            roll={roll}
             onDelete={() => window.confirm(DELETE_MSG) && dispatch({ id, type: "delete" })}
-            onRename={(name) => dispatch({ type: "name", id, name })}
+            onRename={(name) => dispatch({ type: "rename", id, name })}
           />
         ))}
-        <NewRoll onCreate={(roll, name) => dispatch({ type: "parse", roll, name })} />
+        <NewRoll onCreate={(roll, name) => dispatch({ type: "add", roll, name })} />
       </ul>
     </div>
   );
