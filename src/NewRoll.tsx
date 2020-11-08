@@ -24,12 +24,12 @@ export const NewRoll = memo<Props>(({ onCreate }) => {
       <dl className={styles.flexRow}>
         <div className={styles.die + " " + styles.static}>
           <dt>
-            Describe rolls in <em>XdY+Z</em> format.
+            Describe rolls in <em>XdY+Z</em> format
           </dt>
           <input type="text" pattern="[d+-\\d\\s]*" {...roll} />
         </div>
       </dl>
-      <button type="submit">Add roll</button>
+      <button type="submit">Add new roll</button>
     </form>
   );
 });
