@@ -13,31 +13,7 @@
   }
 }
 
-.attrib {
-  position: absolute;
-  font-style: normal;
-  top: 0.5em;
-  right: 0.5em;
-  font-size: 10px;
-  opacity: 0.6;
-}
-
-.title {
-  display: flex;
-  align-items: baseline;
-  margin-top: 1.5em
-}
-.title h5,
-.title h1 {
-  margin: 0;
-}
-
-.header {
-  margin: 0 1em;
-}
-
 .roll dl {
-  --die-size: 40px;
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -122,52 +98,4 @@
 .total {
   font-size: 1.4em;
   line-height: var(--die-size);
-}
-
-.top {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin-bottom: 1em;
-}
-.top h4 {
-  margin: 0;
-}
-.top .roll {
-  margin-left: 1em;
-}
-.top dl {
-  justify-content: center;
-}
-
-.topDice {
-  display: grid;
-  grid-auto-columns: repeat(auto-fill, 60px);
-  grid-gap: 2em;
-}
-
-.canvas {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-}
-
-.canvas .roll {
-  margin: 1em;
-  border: 1px solid cornflowerblue;
-  border-radius: 0.5em;
-  padding: 0.5em;
-}
-
-.canvas .roll:last-child {
-  border-color: gainsboro;
-}
-
-/* responsive styles for mobile */
-@media (max-width: 600px) {
-  .title {
-    flex-direction: column;
-  }
 }

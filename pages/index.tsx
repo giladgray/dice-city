@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from "react";
 import { initialState, reducer, RollState } from "../src/reducer";
 import { OneRoll } from "../src/OneRoll";
-import styles from "../styles/roll.module.css";
+import styles from "../styles/index.module.css";
 import Head from "next/head";
 import { NewRoll } from "../src/NewRoll";
 import { FastDice } from "../src/FastDice";

@@ -18,3 +18,7 @@ a:hover {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --die-size: 40px;
+}
