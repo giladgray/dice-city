@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/roll.module.css";
+import styles from "../styles/index.module.css";
 import { OneRoll } from "./OneRoll";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -25,7 +25,7 @@ export const FastDice: React.FC = () => {
   }
 
   return (
-    <div className={styles.top}>
+    <div className={styles.fast}>
       <h4>
         Fast
         <br />

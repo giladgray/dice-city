@@ -18,27 +18,21 @@
   margin: 0;
 }
 
-.top {
+.fast {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   flex-wrap: wrap;
   margin: 1em;
 }
-.top h4 {
+.fast h4 {
   margin: 0;
 }
-.top > * {
+.fast > * {
   margin-left: 1em;
 }
-.top dl {
+.fast dl {
   justify-content: center;
-}
-
-.topDice {
-  display: grid;
-  grid-auto-columns: repeat(auto-fill, 60px);
-  grid-gap: 2em;
 }
 
 .canvas {
@@ -47,14 +41,12 @@
   margin: 0;
   padding: 0;
 }
-
 .canvas > * {
   margin: 1em;
   border: 1px solid cornflowerblue;
   border-radius: 0.5em;
   padding: 0.5em;
 }
-
 .canvas > *:last-child {
   border-color: gainsboro;
 }

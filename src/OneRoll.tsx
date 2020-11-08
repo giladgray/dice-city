@@ -25,7 +25,7 @@ export const OneRoll = memo<Props>(({ name, roll, onDelete, onRename }) => {
           onBlur={(e) => onRename(e.currentTarget.value)}
         />
       )}
-      <dl className={styles.flexRow}>
+      <dl>
         {els}
         {dice.length > 1 && <span className={styles.total}>= {sum(dice)}</span>}
       </dl>

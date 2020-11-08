@@ -21,7 +21,7 @@ export const NewRoll = memo<Props>(({ onCreate }) => {
   return (
     <form className={styles.roll} onSubmit={handleCreate}>
       <input type="text" {...name} />
-      <dl className={styles.flexRow}>
+      <dl>
         <div className={styles.die + " " + styles.static}>
           <dt>
             Describe rolls in <em>XdY+Z</em> format
