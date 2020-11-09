@@ -1,5 +1,5 @@
 export type ParsedRoll = { count: number; sides: number }[];
-export type RolledDice = { sides: number; value: number }[];
+export type RolledDice = { sides: number; value: number; key: string }[];
 
 const diePattern = /^(\d*)(?:[dD](\d+))?$/;
 export function parseDie(roll: string) {
@@ -19,10 +19,11 @@ export function stringifyRoll(roll: ParsedRoll) {
 }
 
 export function performSingleRoll({ count, sides }: ParsedRoll[0]): RolledDice {
-  if (sides === 1) return [{ sides, value: count }];
+  if (sides === 1) return [{ sides, value: count, key: [sides, count, Math.random().toFixed(3)].join(":") }];
   const rolls: RolledDice = [];
   for (let i = 0; i < count; i++) {
-    rolls.push({ sides, value: 1 + Math.floor(Math.random() * sides) });
+    const value = 1 + Math.floor(Math.random() * sides);
+    rolls.push({ sides, value, key: [sides, value, Math.random().toFixed(3)].join(":") });
   }
   return rolls;
 }
