@@ -37,14 +37,16 @@
   padding: 0 0.2em;
   font-size: 1.3em;
 
-  color: gainsboro;
-  box-shadow: 0 0 4px currentColor;
-  border: 2px solid currentColor;
   border-radius: 4px;
+  border: 1px solid currentColor;
+}
+.die dd {
+  color: gainsboro;
+  box-shadow: 0 0 0.2em currentColor;
 }
 .die span {
   /* inner text, blurred by animation */
-  color: black
+  color: black;
 }
 .die input:invalid {
   border-color: firebrick;
