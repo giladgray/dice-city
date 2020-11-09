@@ -1,6 +1,7 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { parseRoll, performRoll, RolledDice, sum } from "./roll";
 import styles from "../styles/roll.module.css";
+import { Die } from "./Die";
 
 interface Props {
   roll: string;
@@ -9,12 +10,11 @@ interface Props {
   onRename?: (name: string) => void;
 }
 
-export const OneRoll = memo<Props>(({ name, roll, onDelete, onRename }) => {
+export const OneRoll: React.FC<Props> = ({ name, roll, onDelete, onRename }) => {
   const parsed = useMemo(() => parseRoll(roll), [roll]);
   const [dice, setDice] = useState<RolledDice>([]);
   const rolldice = useCallback(() => (parsed ? setDice(performRoll(parsed)) : undefined), [parsed, setDice]);
   useEffect(rolldice, []);
-  const els = dice.map((d, i) => <Die key={[d.value, d.sides, i].join(" ")} {...d} />);
   return (
     <div className={styles.roll}>
       {onRename && (
@@ -26,7 +26,9 @@ export const OneRoll = memo<Props>(({ name, roll, onDelete, onRename }) => {
         />
       )}
       <dl>
-        {els}
+        {dice.map((d, i) => (
+          <Die {...d} key={d.key + i} />
+        ))}
         {dice.length > 1 && <span className={styles.total}>= {sum(dice)}</span>}
       </dl>
       <button onClick={rolldice}>
@@ -36,24 +38,5 @@ export const OneRoll = memo<Props>(({ name, roll, onDelete, onRename }) => {
       {onDelete && <button onClick={onDelete}>&times;</button>}
     </div>
   );
-});
-OneRoll.displayName = "OneRoll";
-
-const Die: React.FC<{ sides: number; value: number }> = ({ sides, value }) => {
-  const classes = [
-    styles.die,
-    value === sides && sides > 1 && styles.crit,
-    value === 1 && sides > 1 && styles.fail,
-    sides === 1 && styles.static,
-    sides === 2 && styles.coin,
-  ]
-    .filter(Boolean)
-    .join(" ");
-  return (
-    <div className={classes}>
-      {sides > 1 && <dt>d{sides}</dt>}
-      <dd>{value}</dd>
-    </div>
-  );
 };
-Die.displayName = "Die";
+OneRoll.displayName = "OneRoll";
