@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { parseRoll, performRoll, RolledDice } from "./roll";
+import { Roll, RolledDice } from "./roll";
 import styles from "../styles/roll.module.css";
 import { Dice } from "./Dice";
 
@@ -11,9 +11,9 @@ interface Props {
 }
 
 export const OneRoll: React.FC<Props> = ({ name, roll, onDelete, onRename }) => {
-  const parsed = useMemo(() => parseRoll(roll), [roll]);
+  const parsed = useMemo(() => Roll.parse(roll), [roll]);
   const [dice, setDice] = useState<RolledDice>([]);
-  const rolldice = useCallback(() => (parsed ? setDice(performRoll(parsed)) : undefined), [parsed, setDice]);
+  const rolldice = useCallback(() => (parsed ? setDice(Roll.roll(parsed)) : undefined), [parsed, setDice]);
   useEffect(rolldice, []);
   return (
     <div className={styles.roll}>

@@ -1,7 +1,7 @@
 import { m as motion } from "framer-motion";
 import React, { memo } from "react";
 import styles from "../styles/roll.module.css";
-import { RolledDice, sum } from "./roll";
+import { Roll, RolledDice } from "./roll";
 
 interface DieProps {
   sides: number;
@@ -19,7 +19,7 @@ export const Die = memo<DieProps>(({ sides, value }) => {
     );
   }
 
-  const color = getColor(sides, value);
+  const color = Roll.color(sides, value);
   const duration = 0.5 + Math.random() * 0.5;
   const loops = 2 + Math.floor(Math.random() * 4);
   return (
@@ -52,13 +52,7 @@ export const Dice: React.FC<DiceProps> = ({ dice, noSum = false }) => (
     {dice.map((d, i) => (
       <Die {...d} key={d.key + i} />
     ))}
-    {dice.length > 1 && !noSum && <span className={styles.total}>= {sum(dice)}</span>}
+    {dice.length > 1 && !noSum && <span className={styles.total}>= {Roll.sum(dice)}</span>}
   </dl>
 );
 Dice.displayName = "Dice";
-
-function getColor(sides: number, value: number) {
-  if (value === sides) return "#daa520";
-  else if (value === 1) return "#b22222";
-  return "#dcdcdc";
-}
