@@ -2,8 +2,10 @@ import { AnimationFeature, MotionConfig } from "framer-motion";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/globals.css";
+import styles from "../styles/index.module.css";
+import { FastDice } from "../src/FastDice";
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <MotionConfig features={[AnimationFeature]}>
       <Head>
@@ -17,9 +19,29 @@ heap.load("1770288665");`}
         </script>
         <title>Dice City</title>
       </Head>
+      <header className={styles.header}>
+        <div className={styles.title}>
+          <h1>Dice City&nbsp;</h1>
+          <h5>where the dice are dicey and the rolls are spicy</h5>
+          <address className={styles.attrib}>
+            Made with {"</>"} by {link("https://twitter.com/giladgray", "@giladgray")}
+            {" – "}
+            {link("https://github.com/giladgray/dice-city", "GitHub")}
+            {" – "}
+            {link("https://www.flaticon.com/free-icon/dice_459493", "Favicon source")}
+          </address>
+        </div>
+        <FastDice />
+      </header>
       <Component {...pageProps} />;
     </MotionConfig>
   );
 }
 
-export default MyApp;
+function link(href: string, text: string) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {text}
+    </a>
+  );
+}
