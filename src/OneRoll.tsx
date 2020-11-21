@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { parseRoll, performRoll, RolledDice, sum } from "./roll";
+import { parseRoll, performRoll, RolledDice } from "./roll";
 import styles from "../styles/roll.module.css";
-import { Die } from "./Die";
+import { Dice } from "./Dice";
 
 interface Props {
   roll: string;
@@ -25,12 +25,7 @@ export const OneRoll: React.FC<Props> = ({ name, roll, onDelete, onRename }) => 
           onBlur={(e) => onRename(e.currentTarget.value)}
         />
       )}
-      <dl>
-        {dice.map((d, i) => (
-          <Die {...d} key={d.key + i} />
-        ))}
-        {dice.length > 1 && <span className={styles.total}>= {sum(dice)}</span>}
-      </dl>
+      <Dice dice={dice} />
       <button onClick={rolldice}>
         Roll <strong>{roll}</strong>
       </button>
