@@ -33,7 +33,7 @@ heap.load("1770288665");`}
         </div>
         <FastDice />
       </header>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </MotionConfig>
   );
 }
