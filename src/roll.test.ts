@@ -1,10 +1,10 @@
 import assert from "assert";
-import { parseRoll } from "./roll";
+import { Roll } from "./roll";
 
 describe("roll parsing", () => {
   function test(roll: string, expected: string | null = roll) {
     it(roll, () => {
-      const parsed = parseRoll(roll);
+      const parsed = Roll.parse(roll);
       assert.strictEqual(parsed?.map((r) => `${r.count}d${r.sides}`).join(" + ") ?? null, expected);
     });
   }
