@@ -12,7 +12,7 @@ export const Die = memo<DieProps>(({ sides, value }) => {
   if (sides === 1) {
     return (
       <div className={styles.die}>
-        <dd style={{ boxShadow: "none" }}>
+        <dd className={styles.static}>
           <span>{value}</span>
         </dd>
       </div>
@@ -47,12 +47,13 @@ interface DiceProps {
   noSum?: boolean;
 }
 
-export const Dice: React.FC<DiceProps> = ({ dice, noSum = false }) => (
-  <dl>
+export const Dice: React.FC<DiceProps> = ({ dice, noSum = false, children }) => (
+  <dl className={styles.dice}>
     {dice.map((d, i) => (
       <Die {...d} key={d.key + i} />
     ))}
     {dice.length > 1 && !noSum && <span className={styles.total}>= {Roll.sum(dice)}</span>}
+    {children}
   </dl>
 );
 Dice.displayName = "Dice";

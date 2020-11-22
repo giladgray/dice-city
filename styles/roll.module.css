@@ -1,15 +1,16 @@
-.roll dl {
-  display: flex;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  font-weight: 600;
-}
 .roll button:not(:last-child),
-.roll .die:not(:last-child) {
+.dice .die:not(:last-child) {
   margin-right: 0.5em;
 }
 .roll input {
   width: 100%;
+}
+
+.dice {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  font-weight: 600;
 }
 
 .die {
@@ -51,6 +52,11 @@
 .die input:invalid {
   border-color: firebrick;
   outline-color: firebrick;
+}
+
+dd.static {
+  box-shadow: none;
+  transform: scale(0.85);
 }
 
 .total {

@@ -1,0 +1,26 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.message {
+  /* display: flex; */
+  align-items: center;
+  margin-bottom: 0.6em;
+}
+
+.message dl {
+  margin: 0 ;
+}
+
+.message button {
+  display: none;
+  margin-left: 1em;
+  /* align-self: center; */
+}
+
+.message:hover button {
+  display: block;
+}
