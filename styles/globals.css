@@ -22,3 +22,10 @@ a:hover {
 :root {
   --die-size: 40px;
 }
+
+#__next {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
